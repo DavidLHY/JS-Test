@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DTA - AngularJS</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <script>
+        // 1 , création puis récuperation
+        angular.module('app', [])
+            .controller('FirstController', function () {
+
+                this.name = 'David';
+                this.profile = {
+                    email: 'dlh@live.fr'
+                }
+
+                this.posX = "50%";
+                this.posY = "50%";
+
+                this.display = [true, false, false];
+
+
+                this.getName = function () {
+                    return ' > ' + this.name.toUpperCase();
+                };
+                this.click = function (num) {
+                    this.display = [false, false, false];
+                    this.display[num] = true;
+                };
+                this.getActive = function (num) {
+                    return this.display[num] ? 'active' : ''
+                }
+
+                this.byebye = function () {
+                    this.posX = (5 + Math.random() * 95) + "%";
+                    this.posY = (5 + Math.random() * 95) + "%";
+                }
+                this.save = (userForm) => {
+                    //console.log('SAVE',userForm);
+
+                    if (userForm.$valid) {
+                        console.log(userForm, this.name);
+                    } else {
+                        console.log('Error');
+                    }
+
+
+                }
+
+
+
+
+            })
+            .controller('InputScriptController', function (UserService) {
+                this.scriptTab = ['', 'one.html', 'two.html', 'three.html'];
+                this.script = 'one.html';
+
+                UserService.getUsers()
+                    .then(users => this.obj = users);
+
+
+                this.inputnav = function (num) {
+                    this.script = this.scriptTab[num];
+                }
+
+
+                this.cut = function (num) {
+                    this.obj = this.obj2.slice(0, num || this.obj2.length);
+                }
+
+
+                this.save = (userForm) => {
+
+                    if (userForm.$valid) {
+
+                        UserService.saveUser(this.user)
+                            .then(user => this.obj.push(user))
+                            ;
+
+                    }
+                };
+
+                this.edit = (user) => {
+                    this.user = angular.copy(user);
+
+                };
+
+                this.delete = (user) => {
+                   UserService.deleteUser(user)
+
+                };
+
+            })
+            .filter('reverse2', function () {
+                return function (input) {
+                    input = input || ""; // pour eviter d'avoir une autre entrée
+                    return input.split('').reverse().join('');
+
+                }
+
+            })
+            .filter('exclamation', function () {
+
+                return function (input = "", sym = "!", nb = 1) {
+                    input = input || ""; // pour eviter d'avoir une autre entrée
+                    var res = input;
+                    for (var i = 0; i < nb; i++)      res += sym;
+
+                    return res
+
+                }
+
+            })
+            .filter('concat', function () {
+                return function (input) {
+
+                    if (!Array.isArray(input)) return "you have no name";
+
+                    return input.map(a => a.name).join(', ');
+
+                }
+
+            })
+            .filter('trierPar', function () {
+
+                return function (input, select = 'name', reverse = false) {
+                    var res = input;
+                    if (select === 'name') {
+                        res.sort(function (a, b) {
+                            return (a.name[field] > b.name[field] ? 1 : -1);
+                        });
+
+                    }
+
+                }
+
+            })
+            .factory("UserService", function ($http) {
+
+
+                return {
+                    getUsers() {
+                        return $http.get('http://localhost:3000/users')
+                            .then(resp => resp.data);
+
+                    },
+
+                    saveUser(user) {
+
+
+                        return (user.id !== undefined) ? $http.put('http://localhost:3000/users/'+user.id, user) : $http.post('http://localhost:3000/users', user)
+                            .then(res => res.data);
+
+
+
+                    },
+
+                    deleteUser(user) {
+
+                        return $http.delete('http://localhost:3000/users/'+user.id)
+                            .then(res => res.data);
+
+
+
+                    }
+
+
+                }
+            })
+            ;
+    </script>
+
+
+</head>
+
+<body ng-app="app">
+
+    <div class="container">
+        <div ng-controller="InputScriptController as iscCtrl">
+
+            <div ng-controller="FirstController as fCtrl">
+                <ul class='nav nav-tabs'>
+                    <li role="presentation" ng-class="{active: fCtrl.display[0] }"> <a ng-click='iscCtrl.inputnav(1); fCtrl.click(0)'> Un</a> </li>
+                    <li role="presentation" ng-class="{active: fCtrl.display[1] }"> <a ng-click='iscCtrl.inputnav(2); fCtrl.click(1)'> Deux </a></li>
+                    <li role="presentation" ng-class="{active: fCtrl.display[2] }"> <a ng-click='iscCtrl.inputnav(3); fCtrl.click(2)'> Trois </a></li>
+                </ul>
+                <ng-include src="'views/'+iscCtrl.script"></ng-include>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>
