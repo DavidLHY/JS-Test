@@ -1,20 +1,21 @@
 import angular from 'angular';
 import ngRoute from 'angular-route';
 
-import { RecipesModule } from './users';
+import { RecipesModule } from './recipes';
 
 
 angular.module('app', [
     RecipesModule,
+    ngRoute
 ])
-    .config(function ($locationProvider) {
+    .config(function ($locationProvider,$routeProvider) {
 
         $locationProvider.html5Mode(true);
 
         $routeProvider
 
             .when('/', {
-                template: 'views/home.html',
+                templateURL: 'views/home.html',
                 controller: 'Home',
                 controllerAs: 'ctrl',
             })
