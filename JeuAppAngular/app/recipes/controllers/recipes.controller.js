@@ -22,7 +22,7 @@ export class RecipesControler {
         let getRandomPizza = () => {
             this.RecipesService
                 .getRandom()
-                .then(recipe => ({ recipe: recipe, toppings: [], status: "INCOMPLETE" }))
+                .then(recipe => ({ recipe: recipe, toppings: [], status: "incomplete" }))
 
                 .then(pizza => this.pizzas.push(pizza))
                 .then(() => {
@@ -45,7 +45,7 @@ export class RecipesControler {
     }
 
     addToppings(top) {
-        if (this.ingame && this.pizza.status === "INCOMPLETE") {
+        if (this.ingame && this.pizza.status === "incomplete") {
             this.pizza.toppings.push(top);
 
 
@@ -58,16 +58,16 @@ export class RecipesControler {
                     if (nbingrRcp !== 0 && nbingrRcp >= nbingrPizza) {
                         // complete or incomplete
                         if (this.pizza.toppings.length === rcp.toppings.length) {
-                            this.pizza.status = "COMPLETE";
+                            this.pizza.status = "complete";
 
-                            this.pizzas = this.pizzas.filter(a => a.status !== "COMPLETE");
+                            this.pizzas = this.pizzas.filter(a => a.status !== "complete");
                             this.pizza = {};
                             this.score++;
                         }//else still incomplete
 
 
                     } else {
-                        this.pizza.status = "WRONG";
+                        this.pizza.status = "wrong";
 
                     }
 

@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Thomas",
+      "email": "thomas@wanadoo.fr",
+      "bio": "bio"
+    },
+    {
+      "id": 2,
+      "name": "Bruno",
+      "email": "bruno@wanadoo.fr",
+      "bio": "bio"
+    },
+    {
+      "id": 3,
+      "name": "Nicolas",
+      "email": "nicolas@wanadoo.fr",
+      "bio": "je suis un campeur"
+    },
+    {
+      "id": 4,
+      "name": "Lilian",
+      "email": "lilian@wanadoo.fr",
+      "bio": "Salut je suis Lilian"
+    },
+    {
+      "id": 6,
+      "name": "Leo",
+      "email": "leo@wanadoo.fr",
+      "bio": "bio dasslkk"
+    }
+  ]
+}
