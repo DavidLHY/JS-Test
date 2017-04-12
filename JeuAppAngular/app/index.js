@@ -15,13 +15,13 @@ angular.module('app', [
         $routeProvider
 
             .when('/', {
-                templateURL: 'views/home.html',
+                templateUrl: 'views/home.html',
                 controller: 'Home',
                 controllerAs: 'ctrl',
             })
 
             .when('/game', {
-                template: 'views/game.html',
+                templateUrl: 'views/game.html',
                 controller: 'RecipesControler',
                 controllerAs: 'ctrl',
             })

@@ -1,8 +1,13 @@
+import { uniq } from 'lodash';
+import { shuffle } from 'lodash';
+
 export class RecipesService {
-    constructor($http,$q, API_URL) {
+    constructor($http, $q, API_URL) {
         this.$http = $http;
-        this.$q = $q ; 
+        this.$q = $q;
         this.API_URL = API_URL;
+       
+
     }
 
     getRecipes() {
@@ -10,10 +15,34 @@ export class RecipesService {
             .then(response => response.data)
     }
 
-    getRecipe(id) {
-        return (id)
-            ? (this.$http.get(`${this.API_URL}/${id}`).then(response => response.data))
-            : this.$q.resolve({});
+    getRecipe(name) {
+        return this.getRecipes()        
+        .then(rps=> rps.filter(rp => rp.name== name )[0]);
+       // .then(a=> {console.log(a); return a;});
     }
+
+    getToppings() {
+        return this.getRecipes()
+            .then(response => shuffle(uniq(response.reduce((a, v) => [...a, ...v.toppings], [])))
+
+            )
+    }
+
+
+    getRandom() {
+
+        return this.getRecipes()
+            .then(rcps => {
+                let rand = Math.floor(Math.random() * rcps.length);
+                return rcps.filter(a => rcps.indexOf(a) === rand);
+            })
+            .then(rcp => rcp[0].name)
+            ;
+
+    }
+
+    
+   
+
 
 }

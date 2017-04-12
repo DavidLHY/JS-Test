@@ -20,7 +20,7 @@
 
 
 
-    <link href="index.css" rel="stylesheet">
+  
 
 
 
@@ -36,8 +36,8 @@
 
                 <div class "panel panel-default">
                     <div class="panel-body">
-                        <ul id='toppings' class='list-group'>
-
+                        <ul  class='list-group' ng-repeat="top in ctrl.toppings">
+                            <li ng-click="ctrl.addToppings(top)" class='list-group-item'> {{top}}</li>
                         </ul>
                     </div>
                 </div>
@@ -49,13 +49,14 @@
 
                 <div class="panel panel-info class">
                     <div id="pizza" class="panel-heading">
-                        <h3> Pizza</h3>
+                        <h3> Pizza: {{ctrl.pizza.recipe}}</h3>
+                        <h4> Score: {{ctrl.score}}</h4>
                     </div>
                     <div class="panel-body">
                         <div id="currentToppings" class "panel">
                             <h3> Ingredients : </h3>
-                            <ul id='ingredients' class='list-group'>
-
+                            <ul id='ingredients' class='list-group' ng-repeat="top in ctrl.pizza.toppings track by $index">
+                                 <li class='list-group-item'> {{top}}</li>
                             </ul>
 
                         </div>
@@ -67,9 +68,9 @@
                 <h1>Commandes</h1>
 
                 <div class "panel">
-                    <ul id='commandes' class='list-group'>
-
-                    </ul>
+                    <ul  class='list-group' ng-repeat="pizz in ctrl.pizzas">
+                            <li ng-click="ctrl.editPizza(pizz)" class='list-group-item' > {{pizz.recipe}}</li>
+                        </ul>
                 </div>
 
             </div>
