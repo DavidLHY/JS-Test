@@ -2,15 +2,14 @@
 
     <div class="col-sm-6">
 
-        <dta-fighter ng-repeat="fighter in $ctrl.team1.fighters track by $index"
-            
+        <dta-fighter ng-repeat="fighter in $ctrl.team1.fighters track by $index"            
             on-fight="$ctrl.setDamages($event)"
             mode="$ctrl.team1.mode"
             email="fighter"
             attack="$ctrl.attack"
-            damages="$ctrl.damages"
+            damages="$ctrl.getDamages($index)"
             get-target="$ctrl.getTarget($event)"
-            after-injured="$ctrl.attackEnd()"></dta-fighter>
+            after-injured="$ctrl.attackEnd($event)"></dta-fighter>
         
     </div>
    
@@ -21,10 +20,10 @@
             on-fight="$ctrl.setDamages($event)"
             mode="$ctrl.team2.mode"
             email="fighter"
-            damages="$ctrl.damages"
             attack="$ctrl.attack"
+            damages="$ctrl.getDamages($index)"
             get-target="$ctrl.getTarget($event)"
-            after-injured="$ctrl.attackEnd()"></dta-fighter>
+            after-injured="$ctrl.attackEnd($event)"></dta-fighter>
         
     </div>
 
