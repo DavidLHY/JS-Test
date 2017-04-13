@@ -1,0 +1,51 @@
+<img 
+   
+    ng-src="https://www.gravatar.com/avatar/{{ $ctrl.md5 }}" 
+    alt="{{ $ctrl.email }}">
+
+
+<p>
+    <i class="material-icons">favorite</i>
+    {{ $ctrl.life }} 
+</p>
+<p>
+    <i class="material-icons">favorite</i>
+    {{ $ctrl.mana }} 
+</p>
+
+<p>
+    <button 
+        ng-if="$ctrl.mode === 'attack'"
+        ng-disabled="$ctrl.life === 0 "
+        ng-click="$ctrl.fight()" 
+        class="btn btn-primary" type="button">Fight !</button>
+</p>
+<p>
+    <button 
+        ng-if="$ctrl.mode === 'attack'"
+        ng-disabled="$ctrl.life === 0 || $ctrl.mana<30"
+        ng-click="$ctrl.bigfight()" 
+        class="btn btn-warning" type="button"> Combo !</button>
+<p>
+<p>
+    <button 
+        ng-if="$ctrl.mode === 'attack'"
+        ng-disabled="$ctrl.life === 0 || $ctrl.mana<40"
+        ng-click="$ctrl.zonalAttack()" 
+        class="btn btn-danger" type="button"> Zone !</button>
+<p>
+<p>
+    <button 
+        ng-if="$ctrl.mode === 'attack'"
+        ng-disabled="$ctrl.life === 0" 
+        ng-click="$ctrl.getMana()" 
+        class="btn btn-info" type="button"> ++Mana</button>
+<p>
+</p>
+    <button 
+        ng-if="$ctrl.mode === 'defense'"
+        ng-disabled="!$ctrl.attack || $ctrl.life === 0"
+        ng-click="$ctrl.suffer()" 
+        class="btn btn-primary" type="button">Target</button>
+
+</p>

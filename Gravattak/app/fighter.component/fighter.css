@@ -1,0 +1,23 @@
+dta-fighter {
+    display: inline-block;
+    padding: .5em;
+    margin: 1em;
+    border: 1px solid #666;
+    border-radius: .5em;
+    min-height: 155px;
+}
+
+dta-fighter img {
+    display: inline-block;
+    max-width: 80px;
+}
+
+dta-fighter p {
+    text-align: center;
+    margin: 0;
+}
+
+dta-fighter p i {
+    vertical-align: middle;
+    color: red;
+}

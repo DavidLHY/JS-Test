@@ -1,0 +1,31 @@
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <dta-fighter ng-repeat="fighter in $ctrl.team1.fighters track by $index"
+            
+            on-fight="$ctrl.setDamages($event)"
+            mode="$ctrl.team1.mode"
+            email="fighter"
+            attack="$ctrl.attack"
+            damages="$ctrl.damages"
+            get-target="$ctrl.getTarget($event)"
+            after-injured="$ctrl.attackEnd()"></dta-fighter>
+        
+    </div>
+   
+
+    <div class="col-sm-6">
+
+        <dta-fighter ng-repeat="fighter in $ctrl.team2.fighters track by $index"
+            on-fight="$ctrl.setDamages($event)"
+            mode="$ctrl.team2.mode"
+            email="fighter"
+            damages="$ctrl.damages"
+            attack="$ctrl.attack"
+            get-target="$ctrl.getTarget($event)"
+            after-injured="$ctrl.attackEnd()"></dta-fighter>
+        
+    </div>
+
+</div>

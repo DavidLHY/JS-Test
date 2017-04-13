@@ -1,7 +1,7 @@
 import angular from 'angular';
 import { RecipesService } from './services/recipes.service';
 import { RecipesControler } from './controllers/recipes.controller';
-
+import { PizzaComponent } from './directive/pizzas.directive'
 
 export const RecipesModule = angular.module('recipes.module', [])
 
@@ -9,7 +9,7 @@ export const RecipesModule = angular.module('recipes.module', [])
     .service('RecipesService', RecipesService)
     .controller('RecipesControler', RecipesControler)
     .controller('DirectiveCtrl', class DirectiveCtrl {
-        constructor() { }
+        constructor() {    }
         editPizza(pizza) {
 
             this.onSelect({
@@ -17,40 +17,17 @@ export const RecipesModule = angular.module('recipes.module', [])
             })
         }
 
-        addToppings(top){
+        addToppings(top) {
             this.onSelect({
                 $event: top
             })
 
         }
+        
 
 
     })
-    .directive("dtaPizza", function () {
-
-        return {
-
-            restrict: 'E',
-            template: `           
-                <h1>Commandes</h1>
-                <div class "panel">
-                     <ul class='list-group'>
-                        <li ng-click="ctrl.editPizza(pizz)" class='list-group-item' ng-class="pizz.status" ng-repeat="pizz in ctrl.pizzas"> {{pizz.recipe}}</li>
-                     </ul>
-                </div>
-            `,
-            bindToController: {
-                pizzas: '=',
-                onSelect: '&'
-            },
-            scope: {},
-            controller: 'DirectiveCtrl',
-            controllerAs: 'ctrl'
-
-        }
-
-
-    })
+    .component("dtaPizza", PizzaComponent)
     .directive("dtaToppings", function () {
 
         return {
